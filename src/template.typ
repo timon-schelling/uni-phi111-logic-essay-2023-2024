@@ -33,7 +33,7 @@
     text(1.1em, date)
     v(1.2em, weak: true)
     text(2em, weight: 700, title)
-  
+
     // Authors
     pad(
       top: 0.7em,
@@ -52,7 +52,7 @@
     outline(depth: 5, indent: true)
     pagebreak()
   }
-  
+
 
   // Page numbering
   set page(numbering: "1")
@@ -65,7 +65,7 @@
     set par(justify: true)
     body
   }
-  
+
 
   // Display the bibliography, if any is given
   if bib != none {
