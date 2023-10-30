@@ -1,0 +1,44 @@
+name: "Deploy"
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: web
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Compile
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ghcr.io/typst/typst:latest
+          options: -v ${{ github.workspace }}:/data
+          run: |
+            cd /data
+            typst compile src/main.typ main.pdf
+            cp main.pdf static/index.pdf
+
+      - name: Upload
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./static
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v2
