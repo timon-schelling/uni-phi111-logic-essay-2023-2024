@@ -1,7 +1,7 @@
 #let project(
   title: "",
   authors: (),
-  date: none,
+  date: datetime.today().display(),
   bib: "refs.yml",
   lang: "de",
   font: "Calibri",
