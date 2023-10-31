@@ -11,57 +11,33 @@
 = Einleitung
 
 #lorem(20)
-@Beckmann:2015[432]
+@beckmann2015[432]
 #lorem(20)
-@Hazewinkel:1993[386-389]
+@hazewinkel1993[386-389]@beckmann2015[432]
 #lorem(20)
-@Metzsch:2011
-#lorem(20)
-@Roux:2013[437]
+@metzsch2011
+#lorem(50)
+@roux2013[437]
 
 = Hauptteil
 
-#lorem(200)
+#lorem(100)
 
 == Thema 1
 
-#lorem(200)
+#lorem(300)
 
 === Thema 1
 
-#lorem(200)
+#lorem(180)
 
 === Thema 2
 
-#lorem(200)
-
-=== Thema 3
-
-#lorem(200)
-
-=== Thema 4
-
-#lorem(200)
+#lorem(150)
 
 == Thema 2
 
-#lorem(200)
-
-=== Thema 1
-
-#lorem(200)
-
-=== Thema 2
-
-#lorem(200)
-
-=== Thema 3
-
-#lorem(200)
-
-=== Thema 4
-
-#lorem(200)
+#lorem(400)
 
 = Fazit
 

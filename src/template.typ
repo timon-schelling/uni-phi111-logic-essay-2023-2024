@@ -2,31 +2,61 @@
   title: "",
   authors: (),
   date: none,
-  bib: "refs.bib",
+  bib: "refs.yml",
+  lang: "de",
+  font: "Calibri",
+  citation: "harvard",
   numbering-skip-outline: false,
   body,
 ) = {
   set document(author: authors, title: title)
-  set text(font: "Calibri", lang: "de")
+  set text(font: font, lang: lang)
   set heading(numbering: "1.1")
   set page(numbering: if numbering-skip-outline { none } else { "1" })
 
-  // Custom citation style
-  set cite(style: "chicago-author-date")
-  show ref: it => {
-    let citation = it.citation
-    if citation == none {
-      return it
-    }
-    let ret = ""
-    ret += "("
-    ret += cite(..citation.keys, style: citation.style, brackets: false)
-    if citation.supplement != none {
-      ret += ": " + citation.supplement
-    }
-    ret += ")"
-    ret
-  }
+  // // Custom citation style
+  // if citation == "harvard" {
+  //   set cite(style: citation)
+  //   show cite: (key, supplement, form, style) => {
+  //     if style != citation {
+  //       return cite(key, supplement, form, style)
+  //     }
+
+  //   }
+  // } else {
+  //   set cite(style: citation)
+  // }
+
+  // show ref: it => {
+  //   let citation = it.citation
+  //   if citation == none {
+  //     return it
+  //   }
+  //   let ret = ""
+  //   ret += "("
+  //   ret += cite(..citation.keys, style: citation.style, brackets: false)
+  //   if citation.supplement != none {
+  //     ret += ": " + citation.supplement
+  //   }
+  //   ret += ")"
+  //   ret
+  // }
+
+  // show ref: it => {
+  //   let citation = it.citation
+  //   if citation == none {
+  //     return it
+  //   }
+  //   let ret = ""
+  //   ret += "("
+  //   ret += cite(..citation.key, style: citation.style, brackets: false)
+  //   if citation.supplement != none {
+  //     ret += ": " + citation.supplement
+  //   }
+  //   ret += ")"
+  //   ret
+  // }
+  // show regex(`\)\(`.text): "test"
 
   // Title page
   {
@@ -69,15 +99,21 @@
 
   // Display the bibliography, if any is given
   if bib != none {
-     show bibliography: it => {
-      set heading(numbering: "1.1")
-      show heading: it => {
-        show "Bibliographie": "Literatur"
-        it
-      }
-      it
-    }
     pagebreak()
-    bibliography(bib, style: "chicago-author-date")
+    bibliography(bib, title: if lang == "de" { "Literatur" } else { none }, style: "chicago-author-date")
   }
+}
+
+#let c(..keys) = {
+  let ret = ""
+  ret += "("
+  ret += keys.pos().map(key => {
+    let (key, supplement) = key.split("|")
+    [
+      #cite(key, style: "chicago-author-date", brackets: false)
+      #if supplement != none { ": " + supplement } else { "" }
+    ]
+  }).join(", ")
+  ret += ")"
+  ret
 }
