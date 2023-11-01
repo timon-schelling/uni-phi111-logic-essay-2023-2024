@@ -1,5 +1,7 @@
 #let date = datetime.today().display()
 
+#set text()
+
 Timon Schelling #date
 
 Tutorium Einführung in die Theoretische Philosophie (4.03.1101f) WiSe 2023/24
@@ -9,6 +11,34 @@ Tutorium Einführung in die Theoretische Philosophie (4.03.1101f) WiSe 2023/24
 ])
 
 = Einführung in die Logik am Beispiel politischer Argumente
+
+#place(top + right, dy: 13em, [
+  #import "@preview/cetz:0.1.2": canvas, draw, tree
+  #import draw: *
+
+  #let data = (
+    [Argument], ([Gültig], ([Deduktiv], [Stichhaltig], [Nicht Stichhaltig]), ([Induktiv], [Stark], [Schwach])), [Ungültig]
+  )
+
+  #figure(
+    table(inset: -0.7em)[
+      #canvas(length: 1cm, {
+        set-style(content: (padding: .5),
+          fill: gray,
+          stroke: gray)
+
+        tree.tree(data, spread: 2.3, grow: 1.4, draw-node: (node, _) => {
+          content((), node.content)
+        }, draw-edge: (from, to, _) => {
+          line((a: from, number: .6, abs: true, b: to),
+              (a: to, number: .6, abs: true, b: from), mark: (end: ">"))
+        })
+      })
+    ],
+    caption: [Überblick Kategorisierung von Argumenten],
+    supplement: [Abbildung]
+  )
+])
 
 == Konzept
 
@@ -47,30 +77,3 @@ Tutorium Einführung in die Theoretische Philosophie (4.03.1101f) WiSe 2023/24
       - Erklärung der Ungültigkeit
 - Fazit
 - Literatur
-
-#pagebreak()
-
-== Schaubild zur kategorisierung von Argumenten
-
-#import "@preview/cetz:0.1.2": canvas, draw, tree
-
-#let data = (
-  [Argument], ([Gültig], ([Deduktiv], [Stichhaltig], [Nicht Stichhaltig]), ([Induktiv], [Stark], [Schwach])), [Ungültig]
-)
-
-#align(center)[
-  #canvas(length: 1cm, {
-  import draw: *
-
-  set-style(content: (padding: .5),
-    fill: gray,
-    stroke: gray)
-
-  tree.tree(data, spread: 2.4, grow: 2, draw-node: (node, _) => {
-    content((), node.content)
-  }, draw-edge: (from, to, _) => {
-    line((a: from, number: .6, abs: true, b: to),
-         (a: to, number: .6, abs: true, b: from), mark: (end: ">"))
-  })
-})
-]
