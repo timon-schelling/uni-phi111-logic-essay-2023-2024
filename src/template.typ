@@ -100,7 +100,7 @@
   // Display the bibliography, if any is given
   if bib != none {
     pagebreak()
-    bibliography(bib, title: if lang == "de" { "Literatur" } else { none }, style: "chicago-author-date")
+    bibliography(bib, title: if lang == "de" { "Literatur" } else { none }, style: "custom.csl")
   }
 }
 

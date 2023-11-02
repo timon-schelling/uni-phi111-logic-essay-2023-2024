@@ -13,7 +13,7 @@
 #lorem(20)
 @beckmann2015[432]
 #lorem(20)
-@hazewinkel1993[386-389]@beckmann2015[432]
+@hazewinkel1993[386-389] @beckmann2015[498]
 #lorem(20)
 @metzsch2011
 #lorem(50)
