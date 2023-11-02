@@ -13,39 +13,13 @@ Handout Essay Einführung in die Logik
   Einführung in die Logik am Beispiel politischer Argumente
 ])
 
-// #place(top + right, dy: 13em, [
-//   #import "@preview/cetz:0.1.2": canvas, draw, tree
-//   #import draw: *
-
-//   #let data = (
-//     [Argument], ([Gültig], ([Deduktiv], [Stichhaltig], [Nicht Stichhaltig]), ([Induktiv], [Stark], [Schwach])), [Ungültig]
-//   )
-
-//   #figure(
-//     table(inset: -0.7em)[
-//       #canvas(length: 1cm, {
-//         set-style(content: (padding: .5),
-//           fill: gray,
-//           stroke: gray)
-
-//         tree.tree(data, spread: 2.3, grow: 1.4, draw-node: (node, _) => {
-//           content((), node.content)
-//         }, draw-edge: (from, to, _) => {
-//           line((a: from, number: .6, abs: true, b: to),
-//               (a: to, number: .6, abs: true, b: from), mark: (end: ">"))
-//         })
-//       })
-//     ],
-//     caption: [Überblick Kategorisierung von Argumenten],
-//     supplement: [Abbildung]
-//   )
-// ])
-
 #text(1.6em, weight: 700, [
   Gliederung
 ])
 
 = Einleitung
+
+- Wie kann einem die Logik helfen, politische Argumente zu bewerten?
 
 = Begriff des Arguments
 
