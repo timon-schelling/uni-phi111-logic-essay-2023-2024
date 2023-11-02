@@ -100,7 +100,12 @@
   // Display the bibliography, if any is given
   if bib != none {
     pagebreak()
-    bibliography(bib, title: if lang == "de" { "Literatur" } else { none }, style: "custom.csl")
+    let title = if lang == "de" { "Literatur" } else { none }
+    show bibliography: it => {
+      set heading(numbering: "1.1")
+      it
+    }
+    bibliography(brib, title: title, style: "custom.csl")
   }
 }
 
