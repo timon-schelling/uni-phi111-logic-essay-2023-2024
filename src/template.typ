@@ -105,7 +105,7 @@
       set heading(numbering: "1.1")
       it
     }
-    bibliography(brib, title: title, style: "custom.csl")
+    bibliography(bib, title: title, style: "custom.csl")
   }
 }
 
