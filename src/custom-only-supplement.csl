@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="de-DE">
+  <info>
+    <title></title>
+    <id></id>
+  </info>
+  <citation>
+    <layout>
+      <text variable="locator"/>
+    </layout>
+  </citation>
+</style>

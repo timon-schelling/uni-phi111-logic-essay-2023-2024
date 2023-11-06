@@ -14,13 +14,6 @@
   set heading(numbering: "1.1")
   set page(numbering: if numbering-skip-outline { none } else { "1" })
 
-  // Citation style test
-  show ref: r => {
-    // set text(red)
-    show regex(`\((.*: )(.*)\/(.*)\)`.text): set text(red)
-    r
-  }
-
 
   // Title page
   {
@@ -71,6 +64,20 @@
     }
     bibliography(bib, title: title, style: "custom.csl")
   }
+}
+
+#let ref(pre, key, post) = {
+  let ret = "("
+  ret += pre
+  ret += "" + {
+    show cite:
+    cite(key, style: "custom-no-brakets.csl")
+  }
+  ret += if post != none { ": " + post } else { "" }
+  ret += post
+  ret += ")"
+  repr(ret)
+  cite(key, supplement: ret, style: "custom-only-supplement.csl")
 }
 
 #let c(..keys) = {
