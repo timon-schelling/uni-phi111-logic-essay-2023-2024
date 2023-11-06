@@ -4,11 +4,6 @@
     <title>Custom Uni Ol Philo</title>
     <id></id>
   </info>
-  <locale xml:lang="de">
-    <terms>
-      <term name="presented at">Gehalten auf</term>
-    </terms>
-  </locale>
   <macro name="secondary-contributors">
     <choose>
       <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="none">

@@ -40,7 +40,7 @@ Handout Essay Einführung in die Logik
     - *fehlende* Konklusion
 
 - Standardform
-  - $A$ ist ein Standardargument $arrow.l.r$ $A$ ist eine Folge von ein oder mehreren Prämissen, gefolgt vom Separator „Also“ und genau einer Konklusion
+  - $A$ ist ein Standardargument $arrow.l.r$ $A$ ist eine Folge von ein oder mehreren Prämissen, gefolgt vom Separator "Also" und genau einer Konklusion
   - Prämissen hier als $P_1$ bis $P_n$ notiert
   - Konklusion als $K$ notiert
 

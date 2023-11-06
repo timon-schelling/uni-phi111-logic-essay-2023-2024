@@ -14,49 +14,13 @@
   set heading(numbering: "1.1")
   set page(numbering: if numbering-skip-outline { none } else { "1" })
 
-  // // Custom citation style
-  // if citation == "harvard" {
-  //   set cite(style: citation)
-  //   show cite: (key, supplement, form, style) => {
-  //     if style != citation {
-  //       return cite(key, supplement, form, style)
-  //     }
+  // Citation style test
+  show ref: r => {
+    // set text(red)
+    show regex(`\((.*: )(.*)\/(.*)\)`.text): set text(red)
+    r
+  }
 
-  //   }
-  // } else {
-  //   set cite(style: citation)
-  // }
-
-  // show ref: it => {
-  //   let citation = it.citation
-  //   if citation == none {
-  //     return it
-  //   }
-  //   let ret = ""
-  //   ret += "("
-  //   ret += cite(..citation.keys, style: citation.style, brackets: false)
-  //   if citation.supplement != none {
-  //     ret += ": " + citation.supplement
-  //   }
-  //   ret += ")"
-  //   ret
-  // }
-
-  // show ref: it => {
-  //   let citation = it.citation
-  //   if citation == none {
-  //     return it
-  //   }
-  //   let ret = ""
-  //   ret += "("
-  //   ret += cite(..citation.key, style: citation.style, brackets: false)
-  //   if citation.supplement != none {
-  //     ret += ": " + citation.supplement
-  //   }
-  //   ret += ")"
-  //   ret
-  // }
-  // show regex(`\)\(`.text): "test"
 
   // Title page
   {
@@ -77,7 +41,7 @@
     pagebreak()
   }
 
-  // Table of contents.
+  // Table of contents
   {
     outline(depth: 5, indent: true)
     pagebreak()
