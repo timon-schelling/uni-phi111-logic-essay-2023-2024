@@ -1,3 +1,10 @@
+#let c(pre, key, post) = {
+  let ret = pre
+  ret += cite(key, style: "custom-no-brackets.csl")
+  ret += if post != none { ": " + post } else { "" }
+  "(" + cite(key, supplement: ret, style: "custom-only-supplement.csl") + ")"
+}
+
 #let project(
   title: "",
   authors: (),
@@ -14,6 +21,36 @@
   set heading(numbering: "1.1")
   set page(numbering: if numbering-skip-outline { none } else { "1" })
 
+  show ref: it => {
+    let ci = it.citation
+    if ci == none or ci.supplement == none {
+      return it
+    }
+
+    let to_string(content) = {
+      if content.has("text") {
+        content.text
+      } else if content.has("children") {
+        content.children.map(to_string).join("")
+      } else if content.has("body") {
+        to_string(content.body)
+      } else if content == [ ] {
+        " "
+      }
+    }
+
+    let s = to_string(ci.supplement).split("|")
+
+    if s.len() == 1 {
+      return c("", ci.key, s.at(0))
+    }
+
+    if s.len() > 1 {
+      return c(s.at(0) + " ", ci.key, s.at(1))
+    }
+
+    it
+  }
 
   // Title page
   {
@@ -66,30 +103,14 @@
   }
 }
 
-#let ref(pre, key, post) = {
-  let ret = "("
-  ret += pre
-  ret += "" + {
-    show cite:
-    cite(key, style: "custom-no-brakets.csl")
+#let to_string(content) = {
+  if content.has("text") {
+    content.text
+  } else if content.has("children") {
+    content.children.map(to-string).join("")
+  } else if content.has("body") {
+    to-string(content.body)
+  } else if content == [ ] {
+    " "
   }
-  ret += if post != none { ": " + post } else { "" }
-  ret += post
-  ret += ")"
-  repr(ret)
-  cite(key, supplement: ret, style: "custom-only-supplement.csl")
-}
-
-#let c(..keys) = {
-  let ret = ""
-  ret += "("
-  ret += keys.pos().map(key => {
-    let (key, supplement) = key.split("|")
-    [
-      #cite(key, style: "chicago-author-date", brackets: false)
-      #if supplement != none { ": " + supplement } else { "" }
-    ]
-  }).join(", ")
-  ret += ")"
-  ret
 }

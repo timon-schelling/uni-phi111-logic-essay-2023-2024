@@ -11,12 +11,12 @@
 = Einleitung <test>
 
 #lorem(20)
-@beckmann2015[vgl. /432]
-#cite(<beckmann2015>, supplement: "/432")
 
-#repr([#cite(<beckmann2015>, style: "custom.csl")])
+@beckmann2015[vgl.|345]@beckmann2015[vgl.|345]
 
-#ref("vgl. ", <beckmann2015>, "432")
+#c("vgl. ", <beckmann2015>, "432")
+
+#repr(c("vgl. ", <beckmann2015>, "432"))
 
 #lorem(20)
 @hazewinkel1993[386-389]@beckmann2015[498]
