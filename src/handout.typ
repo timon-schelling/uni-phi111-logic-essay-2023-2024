@@ -119,8 +119,7 @@ Handout Essay Einführung in die Logik
         tree.tree(data, spread: 2.3, grow: 1.4, draw-node: (node, _) => {
           content((), node.content)
         }, draw-edge: (from, to, _) => {
-          line((a: from, number: .6, abs: true, b: to),
-              (a: to, number: .6, abs: true, b: from), mark: (end: ">"))
+          line((a: from, number: .6, abs: true, b: to), (a: to, number: .6, abs: true, b: from), mark: (end: ">"))
         })
       })
     ],
@@ -128,7 +127,5 @@ Handout Essay Einführung in die Logik
     supplement: [Abbildung]
   )
 ])
-
-
 
 = Literatur
