@@ -5,7 +5,7 @@
     <id></id>
   </info>
   <citation>
-    <layout>
+    <layout prefix="(" suffix=")" delimiter="; ">
       <text variable="locator"/>
     </layout>
   </citation>

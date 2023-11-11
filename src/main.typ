@@ -11,19 +11,15 @@
 = Einleitung <test>
 
 #lorem(20)
-
-@beckmann2015[vgl.|345]@beckmann2015[vgl.|345]
-
-#c("vgl. ", <beckmann2015>, "432")
-
-#repr(c("vgl. ", <beckmann2015>, "432"))
-
+@beckmann2015a[vgl.|345]@beckmann2015b[vgl.|345]
 #lorem(20)
-@hazewinkel1993[386-389]@beckmann2015[498]
+@hazewinkel1993[vgl.|386-389]@beckmann2015a[vgl.|498]
 #lorem(20)
 @metzsch2011
 #lorem(50)
 @roux2013[437]
+
+#cite(<beckmann2015a>, supplement: "test|test", style: auto)
 
 = Hauptteil
 
