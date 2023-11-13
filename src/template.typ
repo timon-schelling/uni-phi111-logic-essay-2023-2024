@@ -1,8 +1,35 @@
+#let cite_link(key, text) = {
+  cite(key, supplement: text, style: "custom-only-supplement.csl")
+}
+
+#let ebd(pre, post: none) = {
+  locate(loc => {
+    let elems = query(selector(ref).before(loc), loc)
+    if elems.len() == 0 {
+      assert(false, message: "No reference found")
+    }
+    let elem = elems.at(-1)
+    let cite = elem.citation
+    if cite == none {
+      assert(false, message: "Found reference but is not a citation")
+    }
+    if cite.key == none {
+      assert(false, message: "No key found for citation ")
+    }
+    let key = cite.key
+    let text = if pre != none { pre + " " } else { "" }
+    text += "ebd."
+    if post != none { text += ": " + post }
+
+    cite_link(key, text)
+  })
+}
+
 #let custom_cite(pre, key, post) = {
   let ret = pre
   ret += cite(key, style: "custom-no-brackets.csl")
   ret += if post != none { ": " + post } else { "" }
-  cite(key, supplement: ret, style: "custom-only-supplement.csl")
+  cite_link(key, ret)
 }
 
 #let show_custom_cite(citation) = {
