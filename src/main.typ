@@ -23,6 +23,10 @@ Das ist ein Zitat mit mehreren Quellen. @roux2013[vgl.|12]@beckmann2015a[vgl.|34
 
 == Zitate mit gleicher Quelle
 
+Das ist ein Zitat. @roux2013[vgl.|12]
+
+Das ist ein Zitat mit gleicher Quelle. @roux2013[!vgl.|34]
+
 #pagebreak()
 
 = Einleitung <test>
@@ -39,7 +43,7 @@ Das ist ein Zitat mit mehreren Quellen. @roux2013[vgl.|12]@beckmann2015a[vgl.|34
 #lorem(20)
 @roux2013[vgl.|3]@beckmann2015a[vgl.|239-241]
 
-#ebd("text")
+@beckmann2015a[vgl.|345]
 
 == Thema
 

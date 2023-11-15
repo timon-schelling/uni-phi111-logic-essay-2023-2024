@@ -2,7 +2,15 @@
   cite(key, supplement: text, style: "custom-only-supplement.csl")
 }
 
-#let ebd(pre, post: none) = {
+#let format_pre_post(pre, post, body) = {
+  let ret = ""
+  ret += if pre != "" { pre + " " } else { "" }
+  ret += body
+  ret += if post != "" { ": " + post } else { "" }
+  ret
+}
+
+#let ebd(pre: "", post: "") = {
   locate(loc => {
     let elems = query(selector(ref).before(loc), loc)
     if elems.len() == 0 {
@@ -17,19 +25,25 @@
       assert(false, message: "No key found for citation ")
     }
     let key = cite.key
-    let text = if pre != none { pre + " " } else { "" }
-    text += "ebd."
-    if post != none { text += ": " + post }
+    let text = format_pre_post(pre, post)[ebd.]
 
     cite_link(key, text)
   })
 }
 
 #let custom_cite(pre, key, post) = {
-  let ret = pre
-  ret += cite(key, style: "custom-no-brackets.csl")
-  ret += if post != none { ": " + post } else { "" }
-  cite_link(key, ret)
+  let ref = cite(key, style: "custom-no-brackets.csl")
+  let text = format_pre_post(pre, post, ref)
+  cite_link(key, text)
+}
+
+#let custom_cite_replace(key, pre, body, post) = {
+  let text = format_pre_post(pre, post, body)
+  cite_link(key, text)
+}
+
+#let ebd(pre, key, post) = {
+  custom_cite_replace(key, pre, "ebd.", post)
 }
 
 #let show_custom_cite(citation) = {
@@ -49,17 +63,49 @@
     }
   }
 
+
+  let force = citation.supplement.starts-with("!")
+
+
   let s = to_string(citation.supplement).split("|")
 
+  let pre = ""
+  let post = ""
+
   if s.len() == 1 {
-    return custom_cite("", citation.key, s.at(0))
+    post = s.at(0)
   }
-
   if s.len() > 1 {
-    return custom_cite(s.at(0) + " ", citation.key, s.at(1))
+    pre = s.at(0)
+    post = s.at(1)
   }
 
-  citation
+  if pre.starts-with("!") {
+    pre = pre.slice(1)
+    return custom_cite(pre, citation.key, post)
+  }
+
+  locate(loc => {
+    let elems = query(selector(ref).before(loc), loc)
+    let is_ebd = true
+    if elems.len() <= 1 {
+      is_ebd = false
+    } else {
+      let elem = elems.at(-2)
+      let cite = elem.citation
+      if cite == none or cite.key == none or cite.key != citation.key {
+        is_ebd = false
+      }
+    }
+
+    // repr(elems)
+
+    if is_ebd {
+      ebd(pre, citation.key, post)
+    } else {
+      custom_cite(pre, citation.key, post)
+    }
+  })
 }
 
 #let show_custom_ref(ref) = {
