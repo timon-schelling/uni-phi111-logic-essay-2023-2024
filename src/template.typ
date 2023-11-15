@@ -64,10 +64,9 @@
   }
 
 
-  let force = citation.supplement.starts-with("!")
+  let str = to_string(citation.supplement)
 
-
-  let s = to_string(citation.supplement).split("|")
+  let s = str.split("@")
 
   let pre = ""
   let post = ""
@@ -80,8 +79,9 @@
     post = s.at(1)
   }
 
-  if pre.starts-with("!") {
-    pre = pre.slice(1)
+  let force = post.starts-with("!")
+  if force {
+    post = post.slice(1)
     return custom_cite(pre, citation.key, post)
   }
 
