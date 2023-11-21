@@ -29,7 +29,7 @@ Das ist ein Zitat mit gleicher Quelle. @roux2013[vgl.@34]
 
 #pagebreak()
 
-= Einleitung <test>
+= Einleitung
 
 #lorem(20)
 @beckmann2015a[vgl.@345]
@@ -53,7 +53,10 @@ Das ist ein Zitat mit gleicher Quelle. @roux2013[vgl.@34]
 
 === Thema
 
-#lorem(60)
+#lorem(20)
+@roux2013[vgl.@437]
+#lorem(20)
+@roux2013[vgl.@437]
 
 === Thema
 

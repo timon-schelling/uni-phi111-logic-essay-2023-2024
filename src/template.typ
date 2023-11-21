@@ -10,27 +10,6 @@
   ret
 }
 
-#let ebd(pre: "", post: "") = {
-  locate(loc => {
-    let elems = query(selector(ref).before(loc), loc)
-    if elems.len() == 0 {
-      assert(false, message: "No reference found")
-    }
-    let elem = elems.at(-1)
-    let cite = elem.citation
-    if cite == none {
-      assert(false, message: "Found reference but is not a citation")
-    }
-    if cite.key == none {
-      assert(false, message: "No key found for citation ")
-    }
-    let key = cite.key
-    let text = format_pre_post(pre, post)[ebd.]
-
-    cite_link(key, text)
-  })
-}
-
 #let custom_cite(pre, key, post) = {
   let ref = cite(key, style: "custom-no-brackets.csl")
   let text = format_pre_post(pre, post, ref)
@@ -86,7 +65,12 @@
   }
 
   locate(loc => {
-    let elems = query(selector(ref).before(loc), loc)
+    let headings = query(selector(heading).before(loc), loc)
+    let elems = if headings.len() >= 0 {
+      query(selector(ref).after(headings.last().location()).before(loc, inclusive: false), loc)
+    } else {
+      query(selector(ref).before(loc, inclusive: false), loc)
+    }
     let is_ebd = true
     if elems.len() <= 1 {
       is_ebd = false
@@ -122,7 +106,7 @@
   bib: "refs.yml",
   lang: "de",
   font: "Calibri",
-  numbering-skip-outline: false,
+  numbering-skip-outline: true,
   body,
 ) = {
   set document(author: authors, title: title)
