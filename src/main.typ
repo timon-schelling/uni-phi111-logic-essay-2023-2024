@@ -53,10 +53,10 @@ Das ist ein Zitat mit gleicher Quelle. @roux2013[vgl.@34]
 
 === Thema
 
-#lorem(20)
-@roux2013[vgl.@437]
-#lorem(20)
-@roux2013[vgl.@437]
+#lorem(16)
+@roux2013[vgl.@21-23]
+#lorem(15)
+@roux2013[vgl.@24]
 
 === Thema
 
