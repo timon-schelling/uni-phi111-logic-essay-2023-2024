@@ -1,8 +1,8 @@
 #let cite_link(key, text) = {
-  cite(key, supplement: text, style: "custom-only-supplement.csl")
+  cite(key, supplement: text, style: "cite_styles/only-supplement.csl")
 }
 
-#let format_pre_post(pre, post, body) = {
+#let custom_cite_format(pre, post, body) = {
   let ret = ""
   ret += if pre != "" { pre + " " } else { "" }
   ret += body
@@ -10,19 +10,18 @@
   ret
 }
 
-#let custom_cite(pre, key, post) = {
-  let ref = cite(key, style: "custom-no-brackets.csl")
-  let text = format_pre_post(pre, post, ref)
+#let custom_cite(key, pre, post, body) = {
+  let text = custom_cite_format(pre, post, body)
   cite_link(key, text)
 }
 
-#let custom_cite_replace(key, pre, body, post) = {
-  let text = format_pre_post(pre, post, body)
-  cite_link(key, text)
+#let custom_cite_auto(key, pre, post) = {
+  let ref = cite(key, style: "cite_styles/main-no-brackets.csl")
+  custom_cite(key, pre, post, ref)
 }
 
-#let ebd(pre, key, post) = {
-  custom_cite_replace(key, pre, "ebd.", post)
+#let custom_cite_ebd(key, pre, post) = {
+  custom_cite(key, pre, post, "ebd.")
 }
 
 #let show_custom_cite(citation) = {
@@ -43,9 +42,10 @@
   }
 
 
+
   let str = to_string(citation.supplement)
 
-  let s = str.split("@")
+  let s = str.split("&")
 
   let pre = ""
   let post = ""
@@ -61,7 +61,7 @@
   let force = post.starts-with("!")
   if force {
     post = post.slice(1)
-    return custom_cite(pre, citation.key, post)
+    return custom_cite_auto(citation.key, pre, post)
   }
 
   locate(loc => {
@@ -83,9 +83,9 @@
     }
 
     if is_ebd {
-      ebd(pre, citation.key, post)
+      custom_cite_ebd(citation.key, pre, post)
     } else {
-      custom_cite(pre, citation.key, post)
+      custom_cite_auto(citation.key, pre, post)
     }
   })
 }

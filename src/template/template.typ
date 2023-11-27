@@ -2,7 +2,7 @@
   title: "",
   authors: (),
   date: datetime.today().display(),
-  bib: "refs.yml",
+  bib: "../refs.yml",
   lang: "de",
   font: "Calibri",
   numbering-skip-outline: true,
@@ -14,7 +14,7 @@
   set page(numbering: if numbering-skip-outline { none } else { "1" })
 
   // Set citation style for refs
-  import "template_cite.typ": *
+  import "cite.typ": *
   show ref: it => show_custom_ref(it)
   show cite.where(style: auto): it => show_custom_cite(it)
 
@@ -65,6 +65,6 @@
       set heading(numbering: "1.1")
       it
     }
-    bibliography(bib, title: title, style: "custom.csl")
+    bibliography(bib, title: title, style: "cite_styles/main.csl")
   }
 }
