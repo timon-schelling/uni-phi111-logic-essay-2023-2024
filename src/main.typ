@@ -27,6 +27,10 @@ Das ist ein Zitat. @roux2013[vgl.@!12]
 
 Das ist ein Zitat mit gleicher Quelle. @roux2013[vgl.@34]
 
+== Zitat mit `cite` Funktion
+
+#cite(<roux2013>, supplement: "vgl.@!12")
+
 #pagebreak()
 
 = Einleitung

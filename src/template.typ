@@ -82,8 +82,6 @@
       }
     }
 
-    // repr(elems)
-
     if is_ebd {
       ebd(pre, citation.key, post)
     } else {
