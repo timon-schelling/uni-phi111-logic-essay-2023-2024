@@ -5,13 +5,26 @@
   bib: "../refs.yml",
   lang: "de",
   font: "Calibri",
+  font-size: 1.2em,
+  leading: 0.85em,
+  heading-padding: 0.4em,
   numbering-skip-outline: true,
   body,
 ) = {
+
+  // Set general document settings
   set document(author: authors, title: title)
-  set text(font: font, lang: lang)
+
+  // Set text settings
+  set text(font: font, lang: lang, size: font-size)
+  set par(leading: leading)
+
+  // Set heading style
   set heading(numbering: "1.1")
-  set page(numbering: if numbering-skip-outline { none } else { "1" })
+  show heading: it => {
+    it
+    v(heading-padding)
+  }
 
   // Set citation style for refs
   import "cite.typ": *
@@ -37,14 +50,16 @@
     pagebreak()
   }
 
+  // Enable page numbering
+  set page(numbering: if numbering-skip-outline { none } else { "1" })
+
   // Table of contents
   {
     outline(depth: 5, indent: true)
     pagebreak()
   }
 
-
-  // Page numbering
+  // Reset page numbering if necessary
   set page(numbering: "1")
   if numbering-skip-outline {
     counter(page).update(1)
@@ -56,8 +71,7 @@
     body
   }
 
-
-  // Display the bibliography, if any is given
+  // Display the bibliography if any is given
   if bib != none {
     pagebreak()
     let title = if lang == "de" { "Literatur" } else { none }
